@@ -1,23 +1,21 @@
-import React, { useState } from "react";
-import ExpenseForm from "./components/ExpenseForm";
-import ExpenseList from "./components/ExpenseList";
-import TotalSpending from "./components/TotalSpending";
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import Spender from "./components/Spender"; // Spender page after login
+// import PrivateRoute from "./routes/PrivateRoute"; // Protect Spender route
 import "./App.css";
 
 const App = () => {
-  const [expenses, setExpenses] = useState([]);
-
-  const addExpenseHandler = (expense) => {
-    setExpenses((prevExpenses) => [...prevExpenses, expense]);
-  };
-
   return (
-    <div className="app-container">
-      <h1>Spender</h1>
-      <ExpenseForm onAddExpense={addExpenseHandler} />
-      <TotalSpending expenses={expenses} />
-      <ExpenseList expenses={expenses} />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        {/* <PrivateRoute path="/spender" element={<Spender />} />{" "} */}
+        {/* Protected route */}
+      </Routes>
+    </Router>
   );
 };
 
