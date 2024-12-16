@@ -1,0 +1,160 @@
+/* General container for the Spender page */
+.spender-container {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fa;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 40px auto;
+    text-align: center;
+  }
+  
+  .spender-container h2 {
+    color: #2c3e50;
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .spender-container p {
+    color: #34495e;
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+  }
+  
+  /* Expense Form Section */
+  .expense-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+  }
+  
+  .expense-form label {
+    display: block;
+    font-size: 1rem;
+    color: #34495e;
+    margin-bottom: 8px;
+  }
+  
+  .expense-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+  
+  .expense-form input[type="number"] {
+    -moz-appearance: textfield; /* Remove arrows on number input for Firefox */
+  }
+  
+  .expense-form button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.1rem;
+  }
+  
+  .expense-form button:hover {
+    background-color: #2980b9;
+  }
+  
+  /* Expense List Section */
+  .expense-list {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .expense-list h2 {
+    color: #2c3e50;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+  }
+  
+  .expense-list ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .expense-list li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    padding: 10px;
+    border-radius: 4px;
+    background-color: #ecf0f1;
+  }
+  
+  .expense-list li span {
+    font-size: 1.1rem;
+  }
+  
+  .expense-list li span:nth-child(1) {
+    font-weight: bold;
+    color: #34495e;
+  }
+  
+  .expense-list li span:nth-child(2) {
+    color: #2ecc71;
+  }
+  
+  .expense-list li span:nth-child(3) {
+    color: #7f8c8d;
+  }
+  
+  /* Total Spending Section */
+  .total-spending {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+  }
+  
+  .total-spending h2 {
+    color: #2c3e50;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+  }
+  
+  .total-spending p {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #e74c3c;
+  }
+  
+  /* Responsive Design for Mobile */
+  @media (max-width: 768px) {
+    .spender-container {
+      padding: 15px;
+    }
+  
+    .expense-form,
+    .expense-list,
+    .total-spending {
+      padding: 15px;
+    }
+  
+    .expense-form input,
+    .expense-form button {
+      font-size: 1rem;
+    }
+  
+    .expense-list li {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .expense-list li span {
+      margin-bottom: 8px;
+    }
+  }
+  
