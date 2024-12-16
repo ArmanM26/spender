@@ -1,0 +1,77 @@
+/* General Body Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+/* Main App Container */
+.app-container {
+  text-align: center;
+  max-width: 600px;
+  margin: 50px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Styling */
+.expense-form {
+  margin-bottom: 20px;
+}
+
+.expense-form div {
+  margin-bottom: 10px;
+}
+
+.expense-form label {
+  margin-right: 10px;
+}
+
+.expense-form input {
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.expense-form button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.expense-form button:hover {
+  background-color: #0056b3;
+}
+
+/* Expense List */
+.expense-list {
+  margin-top: 20px;
+}
+
+.expense-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.expense-list li {
+  display: flex;
+  justify-content: space-between;
+  background: #f9f9f9;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+/* Total Spending Section */
+.total-spending {
+  margin-top: 20px;
+  font-size: 1.2em;
+  font-weight: bold;
+}
