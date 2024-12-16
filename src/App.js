@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Spender from "./components/Spender"; // Spender page after login
-// import PrivateRoute from "./routes/PrivateRoute"; // Protect Spender route
+import PrivateRoute from "./components/PeivateRoute";
 import "./App.css";
 
 const App = () => {
@@ -12,8 +12,16 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        {/* <PrivateRoute path="/spender" element={<Spender />} />{" "} */}
-        {/* Protected route */}
+
+        {/* Protect Spender route with PrivateRoute */}
+        <Route
+          path="/spender"
+          element={
+            <PrivateRoute>
+              <Spender />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </Router>
   );
