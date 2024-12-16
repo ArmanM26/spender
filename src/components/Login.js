@@ -1,18 +1,25 @@
 import { useState } from "react";
+import { Form, Input, Button } from "antd";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "./Firebase";
 import { useNavigate } from "react-router-dom";
-import "../index.css";
+import "../index.css"; // Import the CSS styles
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
+  const [form] = Form.useForm();
   const navigate = useNavigate();
 
-  const handleLogin = async (email, password) => {
+  const handleLogin = async (values) => {
     setLoading(true);
     try {
+      const { email, password } = values;
       await signInWithEmailAndPassword(auth, email, password);
-      navigate("/spender"); // Navigate to the Spender page after login
+
+      // Save authentication status to localStorage
+      localStorage.setItem("isAuthenticated", "true");
+
+      navigate("/spender"); // Redirect to Spender page after login
     } catch (error) {
       console.error("Login error:", error);
     } finally {
@@ -23,24 +30,37 @@ const Login = () => {
   return (
     <div className="login-container">
       <h2>Sign In</h2>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleLogin(e.target.email.value, e.target.password.value);
-        }}
+      <Form
+        layout="vertical"
+        form={form}
+        onFinish={handleLogin}
+        className="form-group"
       >
-        <div>
-          <label>Email</label>
-          <input type="email" name="email" required />
-        </div>
-        <div>
-          <label>Password</label>
-          <input type="password" name="password" required />
-        </div>
-        <button type="submit" disabled={loading}>
+        <Form.Item
+          label="Email"
+          name="email"
+          rules={[{ required: true, message: "Please input your email" }]}
+        >
+          <Input type="email" placeholder="Email" />
+        </Form.Item>
+        <Form.Item
+          label="Password"
+          name="password"
+          rules={[
+            { required: true, message: "Please input your password" },
+            {
+              pattern: /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/,
+              message:
+                "Password must be 6-16 characters and include a number and a special character.",
+            },
+          ]}
+        >
+          <Input.Password placeholder="Password" />
+        </Form.Item>
+        <Button type="primary" htmlType="submit" loading={loading}>
           Sign in
-        </button>
-      </form>
+        </Button>
+      </Form>
     </div>
   );
 };

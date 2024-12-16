@@ -13,9 +13,12 @@ const Register = () => {
   const handleRegister = async (values) => {
     setLoading(true);
     try {
-      const { email, password } = values;
+      const { email, password, name, surname } = values;
+      // Create user in Firebase Authentication
       await createUserWithEmailAndPassword(auth, email, password);
-      navigate("/spender"); // Redirect to Spender page after registration
+
+      // Redirect to login page after registration
+      navigate("/"); // Navigate to login page instead of spender
     } catch (error) {
       console.error("Registration error:", error);
     } finally {
@@ -33,12 +36,29 @@ const Register = () => {
         className="form-group"
       >
         <Form.Item
+          label="First Name"
+          name="name"
+          rules={[{ required: true, message: "Please input your first name" }]}
+        >
+          <Input placeholder="First Name" />
+        </Form.Item>
+
+        <Form.Item
+          label="Surname"
+          name="surname"
+          rules={[{ required: true, message: "Please input your surname" }]}
+        >
+          <Input placeholder="Surname" />
+        </Form.Item>
+
+        <Form.Item
           label="Email"
           name="email"
           rules={[{ required: true, message: "Please input your email" }]}
         >
           <Input type="email" placeholder="Email" />
         </Form.Item>
+
         <Form.Item
           label="Password"
           name="password"
@@ -53,6 +73,7 @@ const Register = () => {
         >
           <Input.Password placeholder="Password" />
         </Form.Item>
+
         <Button type="primary" htmlType="submit" loading={loading}>
           Sign up
         </Button>

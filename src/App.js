@@ -1,26 +1,47 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import Spender from "./components/Spender"; // Spender page after login
-import PrivateRoute from "./components/PeivateRoute";
-import "./App.css";
+import Spender from "./components/Spender";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./components/Firebase";
 
 const App = () => {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      if (currentUser) {
+        localStorage.setItem("isAuthenticated", "true");
+      } else {
+        localStorage.removeItem("isAuthenticated");
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  const isAuthenticated = localStorage.getItem("isAuthenticated");
+
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route
+          path="/"
+          element={
+            isAuthenticated || user ? <Navigate to="/spender" /> : <Login />
+          }
+        />
         <Route path="/register" element={<Register />} />
-
-        {/* Protect Spender route with PrivateRoute */}
         <Route
           path="/spender"
-          element={
-            <PrivateRoute>
-              <Spender />
-            </PrivateRoute>
-          }
+          element={isAuthenticated || user ? <Spender /> : <Navigate to="/" />}
         />
       </Routes>
     </Router>

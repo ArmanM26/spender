@@ -1,29 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import ExpenseForm from "./ExpenseForm";
 import ExpenseList from "./ExpenseList";
-import TotalSpending from "./TotalSpending";
 import "./Spender.css";
 
 const Spender = () => {
+  const navigate = useNavigate();
   const [expenses, setExpenses] = useState([]);
 
-  const addExpenseHandler = (expense) => {
+  // Load expenses from localStorage if available
+  useEffect(() => {
+    const storedExpenses = JSON.parse(localStorage.getItem("expenses"));
+    if (storedExpenses) {
+      setExpenses(storedExpenses);
+    }
+  }, []);
+
+  // Update expenses in localStorage whenever the expenses state changes
+  useEffect(() => {
+    localStorage.setItem("expenses", JSON.stringify(expenses));
+  }, [expenses]);
+
+  const handleLogout = () => {
+    localStorage.removeItem("isAuthenticated");
+    navigate("/"); // Redirect to login
+  };
+
+  const handleAddExpense = (expense) => {
     setExpenses((prevExpenses) => [...prevExpenses, expense]);
   };
 
   return (
     <div className="spender-container">
       <h2>Welcome to Spender</h2>
-      <p>You are logged in and ready to manage your expenses!</p>
-
-      {/* Expense Form */}
-      <ExpenseForm onAddExpense={addExpenseHandler} />
-
-      {/* Expense List */}
+      <ExpenseForm onAddExpense={handleAddExpense} />
       <ExpenseList expenses={expenses} />
-
-      {/* Total Spending */}
-      <TotalSpending expenses={expenses} />
+      {/* <button className="logout-btn" onClick={handleLogout}>Log out</button> */}
     </div>
   );
 };
